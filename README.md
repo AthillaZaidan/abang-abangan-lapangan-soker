@@ -14,6 +14,7 @@ Nama skill: `abang-abangan-lapangan-soker`
 - [Cara Pakai](#cara-pakai--mengangkat-palu)
 - [Tiga Mode](#tiga-mode--tiga-nyala-api)
 - [Cara Kerja](#cara-kerja--di-balik-tempaan)
+- [Hasil Uji](#hasil-uji--bukti-dari-medan)
 - [Isi Repo](#isi-repo--peta-medan)
 - [Menambah Contoh](#menambah-contoh--menitipkan-api)
 - [Peta Jalan](#peta-jalan--fajar-yang-belum-tiba)
@@ -28,9 +29,10 @@ Di antara kelas yang terlalu pagi dan tugas yang terlalu menumpuk, ada mereka ya
 Secara teknis, skill ini memberi Claude:
 
 - **Resep gaya** untuk tiga bentuk output (naratif, padat, berima).
-- **Style guide**: kosakata epik, menu pembuka yang dirotasi, pola kontras, peta metafora benda sepele.
+- **Menu pembuka dan menu pembalik** yang dirotasi, supaya setiap hasil tidak terdengar seragam.
+- **Style guide**: kosakata epik, pola kontras dan penutup, peta metafora benda sepele, cara menjaga rima.
 - **20 contoh** pasangan input dan output sebagai acuan nada.
-- **Checklist** sebelum keluar: makna asli tetap terbaca, bentuk sesuai mode, tidak mengulang pembuka.
+- **Checklist** sebelum keluar: fakta input (termasuk nama diri dan ucapan) tetap tersurat, tidak ada peristiwa karangan, bentuk sesuai mode.
 
 ## Sebelum dan Sesudah — Bara yang Menyala
 
@@ -83,9 +85,15 @@ terjemahin jadi puitis anak lapangan: revisian dosen banyak banget
 versi berima: hujan deras tapi gw tetep berangkat
 ```
 
-Pemicu yang dikenali antara lain: "puitiskan", "terjemahin jadi puitis", "bikin epik", "gaya anak lapangan", "orasi himpunan", "lebay heroik".
+```text
+puitiskan gaya anak lapangan satu-satu ya:
+1. gw ketiduran di kelas
+2. printer di kosan rusak
+```
 
-Output hanya berisi hasil jadinya, tanpa penjelasan proses. Sebut mode secara eksplisit jika ingin memilih sendiri.
+Pemicu yang dikenali antara lain: "puitiskan", "terjemahin jadi puitis", "bikin epik", "versi epik", "dramatisir", "lebay-in", "gaya anak lapangan", "orasi himpunan", "gaya kaderisasi", juga permintaan berbahasa Inggris seperti "make this epic".
+
+Output hanya berisi hasil jadinya, tanpa penjelasan proses. Sebut mode secara eksplisit jika ingin memilih sendiri. Beberapa input sekaligus akan diberi nomor, dan setiap hasil memakai pembuka dan pembalik yang berbeda. Input berbahasa apa pun menghasilkan output berbahasa Indonesia.
 
 ## Tiga Mode — Tiga Nyala Api
 
@@ -93,21 +101,40 @@ Mode dipilih otomatis dari sifat input, atau sebutkan sendiri.
 
 | Mode | Cocok untuk | Bentuk |
 |---|---|---|
-| **Naratif** | perasaan, cerita, rasa syukur | 3-4 kalimat, lembut. Suasana, lalu "ada mereka yang...", lalu kontras, lalu penutup bermakna. |
-| **Padat** | kejadian atau aksi singkat | 3 kalimat, keras. Kondisi sulit, lalu "Namun mereka yang...", lalu "Ini bukan tentang X, tapi Y". |
-| **Berima** | permintaan "puisi", "berima", "bersajak" | 4 baris, semuanya berakhir dengan bunyi vokal yang sama (-a, -an, -ah, atau -i). |
+| **Naratif** | perasaan, cerita, ucapan, input berisi beberapa kegiatan | 3-5 kalimat, lembut. Suasana, lalu tokohnya, lalu kontras "bukan karena X, melainkan Y", lalu penutup bermakna. |
+| **Padat** | kejadian atau aksi singkat | 3 kalimat, keras. Kondisi sulit, lalu kalimat pembalik dari menu, lalu "Ini bukan tentang X, tapi Y". |
+| **Berima** | hanya bila diminta puisi, rima, atau sajak | 4 baris, semuanya berakhir dengan bunyi vokal yang sama (-a, -an, -ah, atau -i). |
 
 ## Cara Kerja — Di Balik Tempaan
 
-1. Tangkap inti makna: siapa, melakukan apa, perasaannya.
+1. Catat fakta input: tindakan, perasaan, nama diri, tempat, angka, dan ucapan (selamat, terima kasih, maaf).
 2. Pilih mode.
-3. Angkat subjek dari "gw/lu" menjadi "mereka", "kami", "kalian", atau "aku".
-4. Pilih pembuka dan pola kontras dari [style-guide.md](.claude/skills/abang-abangan-lapangan-soker/style-guide.md), berbeda dari output sebelumnya.
+3. Pilih sudut pandang. Ucapan ke seseorang disapa langsung dengan "kau", "engkau", atau "kalian". Pengalaman sendiri diangkat menjadi "aku", "kami", atau "mereka".
+4. Pilih satu pembuka dan satu pembalik dari menu di [SKILL.md](.claude/skills/abang-abangan-lapangan-soker/SKILL.md), yang belum dipakai dalam jawaban maupun percakapan.
 5. Tulis draf sesuai resep mode.
-6. Cek: makna asli masih bisa ditebak, bentuk sesuai mode, ada kosakata epik dan satu pembalikan. Revisi sekali jika perlu.
+6. Cek: setiap fakta muncul tersurat, tidak ada peristiwa karangan, bentuk sesuai mode, ada kosakata epik dan satu pembalikan. Revisi sekali jika perlu.
 7. Keluarkan hasilnya saja.
 
-Pembuka dirotasi lewat menu, bukan lewat larangan. Alasannya, panduan berbentuk resep positif lebih patuh diikuti model daripada daftar "jangan", dan rotasi ini mencegah semua output terdengar seragam.
+Pembuka dan pembalik dirotasi lewat menu, bukan lewat larangan. Alasannya, panduan berbentuk resep positif lebih patuh diikuti model daripada daftar "jangan", dan rotasi ini mencegah semua output terdengar seragam.
+
+## Hasil Uji — Bukti dari Medan
+
+Skill diuji dengan 9 input baru yang tidak ada di `examples.md`. Isinya mencakup topik sedih, ucapan selamat ke orang lain, paragraf panjang, input bahasa Inggris, permintaan berima, dan empat input sekaligus. Setiap input dijalankan di Claude Haiku dan Opus dalam tiga kondisi: tanpa skill, skill tersedia tanpa dipanggil, dan skill dipanggil langsung. Penilaian otomatis mengecek tanda seru, slang, emoji, teks meta, panjang, fakta input yang tersurat, rima, dan variasi pembuka.
+
+| Model | Tanpa skill | Skill tersedia | Skill dipanggil |
+|---|---|---|---|
+| Haiku | 66% | 68% (terpicu 1 dari 9) | 84% |
+| Opus | 57% | 88% (terpicu 9 dari 9) | 95% |
+
+Tanpa skill, Claude cenderung memberi beberapa versi sekaligus, membiarkan slang seperti "gw" lolos, dan memakai emoji. Uji ini juga menemukan lima kelemahan yang kemudian diperbaiki di versi sekarang:
+
+- Description terlalu lunak, sehingga Haiku jarang memuat skill.
+- Frasa "mereka yang" muncul di setiap hasil.
+- Nama diri seperti "Google" hilang, dan muncul peristiwa yang tidak ada di input.
+- Ucapan ke orang lain berubah menjadi "mereka".
+- Pembuka berulang ketika banyak input diproses sekaligus.
+
+Perbaikan tersebut belum diuji ulang. Angka di tabel di atas berasal dari versi sebelum perbaikan.
 
 ## Isi Repo — Peta Medan
 
@@ -117,8 +144,8 @@ Pembuka dirotasi lewat menu, bukan lewat larangan. Alasannya, panduan berbentuk 
 └── .claude/
     └── skills/
         └── abang-abangan-lapangan-soker/
-            ├── SKILL.md         # alur, tiga mode, nada, checklist
-            ├── style-guide.md   # kosakata, menu pembuka, pola kontras, peta metafora
+            ├── SKILL.md         # alur, tiga mode, menu pembuka dan pembalik, nada, checklist
+            ├── style-guide.md   # kosakata, pola kontras dan penutup, peta metafora, rima
             └── examples.md      # 20 pasangan input dan output yang disetujui
 ```
 
@@ -130,16 +157,17 @@ Kualitas skill ini ditentukan oleh contohnya. Untuk menambah:
 
 1. Tulis pasangan input biasa dan output puitis di `examples.md`, tandai modenya.
 2. Pastikan output lolos checklist di `SKILL.md`: makna kebawa, bentuk sesuai mode, rima konsisten untuk mode berima.
-3. Jika menemukan pembuka atau kosakata baru yang khas, tambahkan ke `style-guide.md`.
+3. Jika menemukan pembuka atau pembalik baru yang khas, tambahkan ke menu di `SKILL.md`. Kosakata dan metafora baru masuk ke `style-guide.md`.
 
 Contoh yang paling berguna adalah yang topiknya berbeda dari 20 contoh yang ada dan yang nyerempet kehidupan kampus lain, bukan hanya IF.
 
 ## Peta Jalan — Fajar yang Belum Tiba
 
 - [x] Skill dasar dengan tiga mode dan 20 contoh
-- [ ] Uji formal: bandingkan output dengan skill dan tanpa skill, termasuk pengukuran variasi pembuka
+- [x] Uji formal di Haiku dan Opus: dengan skill dan tanpa skill, termasuk pengukuran variasi pembuka
+- [x] Perbaikan dari hasil uji: description lebih tegas, menu pembalik, fakta konkret dijaga, sapaan orang kedua
+- [ ] Uji ulang setelah perbaikan, ditambah Sonnet
 - [ ] Perbanyak contoh menjadi 50 atau lebih, termasuk topik per fakultas dan jurusan
-- [ ] Uji di beberapa model (Haiku, Sonnet, Opus)
 - [ ] Mode tambahan, misalnya sindiran halus (passive-aggressive)
 - [ ] Opsional: kumpulkan pasangan input dan output sebagai dataset untuk fine-tune model lokal (LoRA) agar tidak bergantung pada API
 
